@@ -29,7 +29,6 @@ sub print{
 	foreach (@{$self->{'cards'}}){
 		my $card = cards::getCardByName($_); 
 		print $_." ".$card->{'element'}." ".$card->{'type'}."\n";	
-#		print "$_\n";
 	}
 }
 

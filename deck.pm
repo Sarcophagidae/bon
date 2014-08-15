@@ -34,8 +34,18 @@ sub checkDeck{
 sub shuffle{
 	my $self = shift;	
 	foreach ($self->{'squads'}){
+		push $_->getCards, $self->{'cards'};
 	}
 }
+
+sub print{
+   my $self = shift;
+   foreach (@{$self->{'cards'}}){
+      my $card = cards::getCardByName($_);
+      print $_." ".$card->{'element'}." ".$card->{'type'}."\n";
+   }
+}
+
 
 sub getCard{
    my $self = shift;
