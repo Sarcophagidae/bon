@@ -41,6 +41,11 @@ sub getHero{
 	return undef;
 }
 
+sub getCards{
+	my $self = shift;
+	$self->{'cards'};
+}
+
 sub check{
 	my $self = shift;
 	foreach (@{$self->{'cards'}}){
