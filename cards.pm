@@ -2,6 +2,8 @@
 
 use strict;
 use warnings;
+no warnings 'experimental';
+use 5.014;
 
 package cards;
 
@@ -111,6 +113,7 @@ my %cards = (
 					'attack' => 3,
 					'hp'		=> 6,
 			},
+
    'dwarf legionairre' => {'n' => 11,
                'rar'    => 'rare',
                'type'   => 'creature',
@@ -120,7 +123,18 @@ my %cards = (
                'cost'   => 3,
                'attack' => 1,
                'hp'     => 8,
-         }
+         },
+
+	'umpy' =>	{'n' => 12,
+               'rar'    => 'common',
+               'type'   => 'creature',
+               'element'=> 'swamp',
+               'skills' => [],
+               'attack type'  => 'basic',
+               'cost'   => 2,
+               'attack' => 1,
+               'hp'     => 4,
+	}
 );
 
 
@@ -132,7 +146,50 @@ sub getCardByName{
 }
 
 sub checkCard{
-#check that card exists
+# Check that card exists
 	my $name = shift;
 	exists $cards{$name};
+}
+
+sub printCard{
+# Just print info about card in fine format
+# first param = card name
+
+	return unless  (exists($_[0]));
+	my $name = $_[0];
+	return unless (checkCard($name));
+
+	if (exists ($_[1])){
+	# style of printing
+	}
+	
+	my $type;
+	given($cards{$name}->{'type'}){
+		when (/creature/) {$type = 'cre';}
+		when (/hero/) {$type = 'H'; }
+		when (/terrain/) {$type = 'Ter'; }
+		when (/equip/) {$type = 'eq'; }
+	}
+	
+	print "$type\t";
+	if (($type eq 'cre') || ($type eq 'H')){
+		print $cards{$name}{'attack type'}." ";
+		print "[";
+		print "$_," foreach (@{$cards{$name}->{'skills'}});
+		print "]\t";
+	} 
+	print "$name\t";
+
+	print "\n";
+}
+
+sub printAllCards{
+# Print all cards
+# Can get cars with some params:
+# first param - type of property
+# second param - value of it
+# now cant be used on list property (e.g. skills, lay)
+	foreach (keys %cards){
+		printCard($_);
+	}
 }
