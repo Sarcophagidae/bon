@@ -160,7 +160,7 @@ sub printCard{
 	my $name = $_[0];
 	return unless (checkCard($name));
 	
-	my $style = 'ntAs';
+	my $style = 'NtAs';
 	$style = $_[1] if (exists ($_[1]));
 	
 		foreach (split "", $style){

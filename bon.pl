@@ -16,7 +16,10 @@ $sqd->addCard('angel of retribution');
 $sqd->addCard('harpooneer3');
 $sqd->addCard('irdly');
 
-my $d = deck->create;
+#print Dumper($sqd);
+
+my $d = deck->create();
+$d->addSquad($sqd);
 $d->addSquad($sqd);
 $d->shuffle;
 $d->print;

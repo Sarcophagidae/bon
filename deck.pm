@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use cards;
 use squad;
+use Data::Dumper;
 
 our $VERSION = '0.01';
 
@@ -25,7 +26,7 @@ sub addSquad{
 }
 
 sub checkDeck{
-   my $self = shift;
+  my $self = shift;
 	foreach ($self->{'squads'}){
 		$_->check();
 	}
@@ -33,16 +34,15 @@ sub checkDeck{
 
 sub shuffle{
 	my $self = shift;	
-	foreach ($self->{'squads'}){
-		push $_->getCards, $self->{'cards'};
+	foreach (@{$self->{'squads'}}){
+		push @{$self->{'cards'}},@{$_->getCards};
 	}
 }
 
 sub print{
    my $self = shift;
    foreach (@{$self->{'cards'}}){
-      my $card = cards::getCardByName($_);
-      print $_." ".$card->{'element'}." ".$card->{'type'}."\n";
+      cards::printCard($_);
    }
 }
 
