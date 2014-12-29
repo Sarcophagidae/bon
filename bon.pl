@@ -23,3 +23,4 @@ $d->addSquad($sqd);
 $d->addSquad($sqd);
 $d->shuffle;
 $d->print;
+$d->print;
