@@ -27,7 +27,7 @@ sub addSquad{
 
 sub checkDeck{
   my $self = shift;
-	foreach ($self->{'squads'}){
+	foreach (@{$self->{'squads'}}){
 		$_->check();
 	}
 }
