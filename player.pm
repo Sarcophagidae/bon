@@ -73,8 +73,35 @@ sub showHand{
 	$str;
 }
 
+sub allCostDec{
+	my $self = shift;
+	my $count = shift || 1;
+	
+	foreach my $card (@{$self->{'hand'}}){
+		if ($card->{cost} - $count >= 0){
+			$card->{cost} -= $count;
+		} else {
+			$card->{cost} = 0;
+		}
+	}
+}
+
 sub getFromHand{
     my $self    = shift;
+	my $id 		= shift || return undef;
+
+# id must be is human readable
+# card1 card2 card3
+# 		 /\
+#   1     2     3
+# marked card have id 2 (not programming 1)
+
+	return undef if(scalar @{$self->{hand}}<$id);
+
+	my $card = @{$self->{hand}}[$id-1];
+
+	splice @{$self->{hand}},$id-1,1;
+	$card;
 }
 
 1;
